@@ -1,0 +1,70 @@
+<div style="margin-bottom: 200px;">
+
+	<form *ngIf="harddisk" #Updateharddisk="ngForm">
+		<div class="form-group row">
+			<label class="col-sm-12 col-md-2 col-form-label">ID</label>
+			<div class="col-sm-12 col-md-10">
+				<input class="form-control" type="text" ([ngModel])="harddisk.id" name="ID" disabled="true"
+					placeholder="{{harddisk.id}}">
+			</div>
+		</div>
+		<div class="form-group row">
+			<label class="col-sm-12 col-md-2 col-form-label">HDD</label>
+			<div class="col-sm-12 col-md-10">
+				<input class="form-control" name="hdd" id="hdd" [(ngModel)]="harddisk.hdd" required type="text">
+			</div>
+		</div>
+		<div class="form-group row">
+			<label class="col-sm-12 col-md-2 col-form-label">SSD</label>
+			<div class="col-sm-12 col-md-10">
+				<input class="form-control" name="ssd" id="ssd " [(ngModel)]="harddisk.ssd" required type="text">
+			</div>
+		</div>
+		<div class="form-group row">
+			<label class="col-sm-12 col-md-2 col-form-label">Count</label>
+			<div class="col-sm-12 col-md-10">
+				<input class="form-control" name="Count" disabled="true" [(ngModel)]="harddisk.count"  required type="number">
+			</div>
+		</div>
+		
+		
+		
+		<button type="button" [disabled]="!Updateharddisk.form. valid" data-toggle="modal" href="#ignismyModal" class="btn btn-primary"
+			style="margin-bottom: 50px; margin-top: 10px; width: 10%; margin-left: 90%;" (click)="Update(harddisk)">
+			Update
+		</button>
+	</form>
+	<div class="modal fade" id="ignismyModal" role="dialog">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label=""><span>×</span></button>
+				 </div>
+				
+				<div class="modal-body" *ngIf="updated==1">
+					<div class="thank-you-pop">
+						<img src="../assets/greenRound.png" alt="">
+						<h1>Success!</h1>
+						<p>The Harddisk Card was updated</p>
+						<h3 class="cupon-pop">Harddisk ID: <span>{{harddisk.id}}</span></h3>
+						
+					 </div> 
+				</div>
+				<div class="modal-body" *ngIf="updated==2">
+					<div class="thank-you-pop">
+						<img src="../assets/Error.png" alt="">
+						<h1>ERROR!</h1>
+						<p>The harddisk couldn't be updated, Try Again Later</p>
+					 </div>
+				</div>
+				<div class="modal-body" *ngIf="updated==0">
+					<div class="thank-you-pop">
+						<img src="../assets/loading.png" alt="">
+						<h1>Loading!</h1>
+						<p>Waiting for your save</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

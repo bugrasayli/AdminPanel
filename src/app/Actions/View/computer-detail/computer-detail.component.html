@@ -1,0 +1,173 @@
+<div style="margin-bottom: 200px;">
+
+	<form *ngIf="computer.detail" #UpdateForm="ngForm">
+		<div class="form-group row">
+			<label class="col-sm-12 col-md-2 col-form-label">ID</label>
+			<div class="col-sm-12 col-md-10">
+				<input class="form-control" type="text" ([ngModel])="computer.id" name="ID" disabled="true"
+					placeholder="{{computer.id}}">
+			</div>
+		</div>
+		<div class="form-group row">
+			<label class="col-sm-12 col-md-2 col-form-label">Name</label>
+			<div class="col-sm-12 col-md-10">
+				<input class="form-control" name="name" id="name" [(ngModel)]="computer.name" required type="search">
+			</div>
+		</div>
+		<div class="form-group row">
+			<label class="col-sm-12 col-md-2 col-form-label">Price</label>
+			<div class="col-sm-12 col-md-10">
+				<input class="form-control" name="price" (keyup)="PriceKeyup($event)"
+					[(ngModel)]="computer.detail.price" required type="number">
+			</div>
+		</div>
+		<div class="form-group row">
+			<label class="col-sm-12 col-md-2 col-form-label">Discount</label>
+			<div class="col-sm-12 col-md-10">
+				<input class="form-control" name="discout" (keyup)="DiscountKeyup($event)"
+					[(ngModel)]="computer.detail.discount" type="number">
+			</div>
+		</div>
+		<div class="form-group row">
+			<label class="col-sm-12 col-md-2 col-form-label">Last Price</label>
+			<div class="col-sm-12 col-md-10">
+				<input class="form-control" disabled="true" name="LastPrice" [(ngModel)]="computer.detail.lastPrice"
+					type="text">
+			</div>
+		</div>
+		<div class="form-group row">
+			<label class="col-sm-12 col-md-2 col-form-label">Sold</label>
+			<div class="col-sm-12 col-md-10">
+				<input class="form-control" disabled="true" name="sold" [(ngModel)]="computer.detail.sold"
+					type="number">
+			</div>
+		</div>
+		<div class="form-group row">
+			<label class="col-sm-12 col-md-2 col-form-label">Stock</label>
+			<div class="col-sm-12 col-md-10">
+				<input class="form-control" name="stock" ([ngModel])="computer.detail.stockSize" required
+					[(ngModel)]="computer.detail.stockSize" type="number">
+			</div>
+		</div>
+		<div class="form-group row">
+			<label class="col-sm-12 col-md-2 col-form-label">Info</label>
+			<div class="col-sm-12 col-md-10">
+				<input class="form-control" name="info" ([ngModel])="computer.detail.moreInfo" required
+					[(ngModel)]="computer.detail.moreInfo" type="text">
+			</div>
+		</div>
+		<div class="form-group row" *ngIf="types">
+			<label class="col-sm-12 col-md-2 col-form-label">Type</label>
+			<div class="col-sm-12 col-md-10">
+				<select class="custom-select col-12" (change)="ChangeType($event)" name="type" required>
+					<option *ngFor="let type of types" ([ngModel])="computer.type.name"
+						[selected]="computer.type.id === type.id" value="{{type.id}}">
+						{{type.name}}
+					</option>
+				</select>
+			</div>
+		</div>
+		<div class="form-group row" *ngIf="brands">
+			<label class="col-sm-12 col-md-2 col-form-label">Brand</label>
+			<div class="col-sm-12 col-md-10">
+				<select class="custom-select col-12" (change)="ChangeBrand($event)" required name="brand">
+					<option *ngFor="let brand of brands" [selected]="computer.brand.id === brand.id"
+						value="{{brand.id}}">
+						{{brand.name}}
+					</option>
+				</select>
+			</div>
+		</div>
+		<div class="form-group row" *ngIf="rams">
+			<label class="col-sm-12 col-md-2 col-form-label">Ram</label>
+			<div class="col-sm-12 col-md-10">
+				<select class="custom-select col-12" (change)="ChangeRam($event)" name="ram" required>
+					<option *ngFor="let ram of rams" [selected]="computer.ram.id === ram.id" value="{{ram.id}}">
+						{{ram.name}}
+					</option>
+				</select>
+			</div>
+		</div>
+		<div class="form-group row" *ngIf="graphics">
+			<label class="col-sm-12 col-md-2 col-form-label">Graphic Card</label>
+			<div class="col-sm-12 col-md-10">
+				<select class="custom-select col-12" name="graphic" (change)="ChangeGraphic($event)">
+					<option *ngFor="let graphic of graphics" required
+						[selected]="computer.graphicCard.id === graphic.id" value="{{graphic.id}}">
+						{{graphic.name}}
+					</option>
+				</select>
+			</div>
+		</div>
+		<div class="form-group row" *ngIf="memories">
+			<label class="col-sm-12 col-md-2 col-form-label">Hard Disks</label>
+			<div class="col-sm-12 col-md-10">
+				<select class="custom-select col-12" name="graphic" (change)="ChangeMemory($event)">
+					<option *ngFor="let memory of memories" required [selected]="computer.graphicCard.id === memory.id"
+						value="{{memory.id}}">
+						{{memory.hdd}} and {{memory.ssd}}
+					</option>
+				</select>
+			</div>
+		</div>
+		<div class="form-group row" *ngIf="cpus">
+			<label class="col-sm-12 col-md-2 col-form-label">CPU (Processor)</label>
+			<div class="col-sm-12 col-md-10">
+				<select class="custom-select col-12" required (change)="ChangeCPU($event)">
+					<option *ngFor="let cpu of cpus" [selected]="computer.processor.id === cpu.id" value="{{cpu.id}}">
+						{{cpu.name}}
+					</option>
+				</select>
+			</div>
+		</div>
+		<div class="form-group row" *ngIf="countries">
+			<label class="col-sm-12 col-md-2 col-form-label">Made in</label>
+			<div class="col-sm-12 col-md-10">
+				<select class="custom-select col-12" (change)="ChangeCountry($event)">
+					<option *ngFor="let countr of countries" required [selected]="computer.country.id === countr.id"
+						value="{{countr.id}}">
+						{{countr.name}}
+					</option>
+				</select>
+			</div>
+		</div>
+		<button type="button" [disabled]="!UpdateForm.form.valid" data-toggle="modal" href="#ignismyModal"
+			class="btn btn-primary" style="margin-bottom: 50px; margin-top: 10px; width: 10%; margin-left: 90%;"
+			(click)="Update(computer)">
+			Update
+		</button>
+	</form>
+	<div class="modal fade" id="ignismyModal" role="dialog">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label=""><span>×</span></button>
+				</div>
+				<div class="modal-body" *ngIf="updated==0">
+					<div class="thank-you-pop">
+						<img src="../assets/loading.png" alt="">
+						<h1>Loading!</h1>
+						<p>Waiting for your save</p>
+
+					</div>
+				</div>
+				<div class="modal-body" *ngIf="updated==1">
+					<div class="thank-you-pop">
+						<img src="../assets/greenRound.png" alt="">
+						<h1>Success!</h1>
+						<p>The computer was updated</p>
+						<h3 class="cupon-pop">Computer ID: <span>{{computer.id}}</span></h3>
+					</div>
+				</div>
+				<div class="modal-body" *ngIf="updated==2">
+					<div class="thank-you-pop">
+						<img src="../assets/Error.png" alt="">
+						<h1>ERROR!</h1>
+						<p>The computer couldn't be updated, Try Again Later</p>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
